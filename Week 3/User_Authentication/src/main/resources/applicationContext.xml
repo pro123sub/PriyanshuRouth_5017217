@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean definition for UserService -->
+    <bean id="userService" class="com.library.user_authentication.service.UserService">
+        <!-- Inject the UserRepository dependency -->
+        <property name="userRepository" ref="userRepository" />
+    </bean>
+
+    <!-- Bean definition for UserRepository -->
+    <bean id="userRepository" class="com.library.user_authentication.repository.UserRepository">
+        <!-- Inject any required dependencies -->
+    </bean>
+
+    <!-- You can define other beans here as needed -->
+</beans>
