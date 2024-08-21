@@ -3,6 +3,8 @@ package com.library.bookstoreapi.controller;
 
 import com.library.bookstoreapi.Services.BookServices;
 import com.library.bookstoreapi.model.Book;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -17,16 +19,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
+@Tag(name = "Book Controller", description = "Book management endpoints")
 public class BookController
 {
     Book book ;
     private List<Book> bookList = new ArrayList<>();
-    public List<Book> getAllBooks() {
+    public List<Book> getAllBooks()
+    {
         return bookList;
     }
     @PostMapping
-    public Book addBook(@RequestBody Book book) {
-
+    public Book addBook(@RequestBody Book book)
+    {
         bookList.add(book);
         return book;
     }
@@ -55,6 +59,7 @@ public class BookController
         bookList.removeIf(book -> book.getId().equals(id));
         return "Book with ID " + id + " has been deleted.";
     }
+    @Operation(summary = "Get book by ID")
     @GetMapping(value = "/books/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public EntityModel<Book> getBookById(@PathVariable Long id)
     {
